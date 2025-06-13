@@ -1,1 +1,8 @@
+venv/
+__pychache__/
 ".env" 
+*sqlite3
+.vscode/
+.idea/
+**/migrations/*.py
+!**/migrations/__init__.py

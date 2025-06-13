@@ -169,3 +169,48 @@ class SetNewPasswordView(APIView):
         user.save()
 
         return Response({"message": "Contraseña actualizada correctamente."})
+
+
+
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import ReporteIncidente
+from .serializers import ReporteIncidenteSerializer
+
+class ReporteIncidenteView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = ReporteIncidenteSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"mensaje": "Reporte recibido correctamente"}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+    
+    
+    
+
+
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import ReporteIncidente
+from .analysis.analytics import AnalizadorReportes
+
+class AnalisisReporteAPIView(APIView):
+    """
+    Devuelve análisis estadístico de los reportes: tipo más común, hora pico y zona más reportada.
+    """
+
+    def get(self, request):
+        reportes = ReporteIncidente.objects.all()
+        if not reportes.exists():
+            return Response({"error": "No hay reportes disponibles."}, status=status.HTTP_404_NOT_FOUND)
+
+        analizador = AnalizadorReportes(reportes)
+        resumen = analizador.resumen()
+
+        return Response(resumen, status=status.HTTP_200_OK)
+

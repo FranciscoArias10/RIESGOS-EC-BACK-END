@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import APILoginView, APIRegisterView
+from .views import APILoginView, APIRegisterView, ReporteIncidenteView,AnalisisReporteAPIView
 from .views import (
     RequestPasswordResetView,
     VerifyResetCodeView,
@@ -14,4 +14,6 @@ urlpatterns = [
     path("solicitar-reset/", RequestPasswordResetView.as_view()),
     path("verificar-codigo/", VerifyResetCodeView.as_view()),
     path("nueva-contrasena/", SetNewPasswordView.as_view()),
+    path('reporte/', ReporteIncidenteView.as_view(), name='reporte_incidente'),
+    path('analisis/', AnalisisReporteAPIView.as_view(), name='analisis-reportes'),
 ]
