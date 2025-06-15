@@ -1,17 +1,20 @@
 from django.urls import path
-from .views import APILoginView, APIRegisterView
 from .views import (
+    APILoginView,
+    APIRegisterView,
     RequestPasswordResetView,
     VerifyResetCodeView,
     SetNewPasswordView,
+    PerfilView,
 )
-
-# o cualquier otra vista que estés usando
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("login/", APILoginView.as_view(), name="api-login"),
-    path("register/", APIRegisterView.as_view(), name="api-register"),
+    path("registro/", APIRegisterView.as_view(), name="registro"),
     path("solicitar-reset/", RequestPasswordResetView.as_view()),
     path("verificar-codigo/", VerifyResetCodeView.as_view()),
     path("nueva-contrasena/", SetNewPasswordView.as_view()),
-]
+    path("perfil/", PerfilView.as_view(), name="perfil"),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -9,6 +9,7 @@ class Usuarios(AbstractUser):
     email = models.EmailField(unique=True)
     fecha_nac = models.DateField(blank=True)
     calle = models.CharField(max_length=80)
+    foto = models.ImageField(upload_to="fotos_perfil/", null=True, blank=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = [
@@ -31,3 +32,12 @@ class Recuperar_contrasena(models.Model):
 
     def __str__(self):
         return f"Código {self.codigo} para {self.usuario.email}"
+
+class Reporte(models.Model):
+        descripcion = models.TextField()
+        imagen = models.ImageField(upload_to='reportes/', null=True, blank=True)
+        fecha = models.DateTimeField(auto_now_add=True)
+
+        def __str__(self):
+            return f"Reporte {self.id} - {self.fecha}"
+        

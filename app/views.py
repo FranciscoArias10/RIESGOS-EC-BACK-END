@@ -169,3 +169,30 @@ class SetNewPasswordView(APIView):
         user.save()
 
         return Response({"message": "Contraseña actualizada correctamente."})
+
+
+# -----------------------------CODIGO PARA PAGINA DE PERFIL-------------------------------
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import UsuarioSerializer  # Asegúrate de importar el serializer
+
+
+class PerfilView(APIView):
+    permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]  # acepta imagen y texto
+
+    def get(self, request):
+        serializer = UsuarioSerializer(request.user)
+        return Response(serializer.data)
+
+    def put(self, request):
+        serializer = UsuarioSerializer(request.user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
+

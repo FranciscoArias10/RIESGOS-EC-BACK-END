@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import JsonResponse
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 @ensure_csrf_cookie
@@ -14,3 +16,5 @@ urlpatterns = [
     path("api/", include("app.urls")),  # Aquí tienes tus endpoints
     path("api/csrf/", csrf),  # CSRF Token handler
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
