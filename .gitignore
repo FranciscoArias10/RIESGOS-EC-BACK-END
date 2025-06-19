@@ -1,11 +1,37 @@
-*media
-*.sqlite
-*db.sqlite
-*venv/
-*__pycache__/
-*py[cod]
-*.env
+# Entornos virtuales
+venv/
+.env
+
+# Archivos de base de datos
+db.sqlite3
+
+# Archivos de migraciones
+**/migrations/*.pyc
+**/migrations/__pycache__/
+**/migrations/*.py
+
+# Archivos de caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de logs
+*.log
+
+# Archivos de compilación
+*.so
+*.o
+*.pyc
+
+# Archivos de configuración de editor
 .vscode/
 .idea/
-**/migrations/*.py
-!**/migrations/__init__py
+
+# Archivos temporales
+*.bak
+*.swp
+*.swo
