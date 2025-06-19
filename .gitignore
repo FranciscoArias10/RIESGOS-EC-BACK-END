@@ -1,0 +1,11 @@
+*media
+*.sqlite
+*db.sqlite
+*venv/
+*__pycache__/
+*py[cod]
+*.env
+.vscode/
+.idea/
+**/migrations/*.py
+!**/migrations/__init__py
