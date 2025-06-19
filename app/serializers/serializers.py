@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
-from .models import Usuarios
-from .models import ReporteIncidente
+from app.models import Usuarios
+from app.models import ReporteIncidente
 
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
