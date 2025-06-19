@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Usuarios, Recuperar_contrasena
-
+from .models import Usuarios, Recuperar_contrasena,ReporteEmergencia
 
 class CustomUserAdmin(UserAdmin):
     model = Usuarios
@@ -48,3 +47,4 @@ class CustomUserAdmin(UserAdmin):
 
 admin.site.register(Usuarios, CustomUserAdmin)
 admin.site.register(Recuperar_contrasena)
+admin.site.register(ReporteEmergencia) 

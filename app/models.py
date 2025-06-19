@@ -33,11 +33,20 @@ class Recuperar_contrasena(models.Model):
     def __str__(self):
         return f"Código {self.codigo} para {self.usuario.email}"
 
-class Reporte(models.Model):
-        descripcion = models.TextField()
-        imagen = models.ImageField(upload_to='reportes/', null=True, blank=True)
-        fecha = models.DateTimeField(auto_now_add=True)
+class ReporteEmergencia(models.Model):
+    TIPO_CHOICES = [
+        ('Robo', 'Robo'),
+        ('Homicidio', 'Homicidio'),
+        ('Extorsion', 'Extorsion'),
+        ('Secuestro', 'Secuestro'),
+    ]
 
-        def __str__(self):
-            return f"Reporte {self.id} - {self.fecha}"
-        
+    tipo_incidente = models.CharField(max_length=50, choices=TIPO_CHOICES)
+    descripcion = models.TextField(blank=True)
+    imagen = models.ImageField(upload_to='reportes/', null=True, blank=True)
+    latitud = models.FloatField()
+    longitud = models.FloatField()
+    fecha_reporte = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.tipo_incidente} en {self.latitud}, {self.longitud}"
